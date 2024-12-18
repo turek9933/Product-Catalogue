@@ -1,0 +1,51 @@
+{
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Login",
+    "no_account": "Register here",
+    "error": "Login failed."
+  },
+  "register": {
+    "title": "Register",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Register",
+    "success": "Registration successful! Please log in."
+  },
+  "logout": "Logout",
+  "admin": "Admin",
+  "user": "User",
+  "edit_products": "Edit Products",
+  "welcome": "Welcome to the Product Catalog",
+  "description": "Soon we will add more features!",
+  "currentLanguage": "Current language",
+  "product_list_title": "Product List",
+  "error_default": "An unexpected error occurred.",
+  "error_404": "Page not found.",
+  "error_in_progress": "This feature is still in progress. Please check back later!",
+  "go_home": "Go to Homepage",
+  "menu": {
+    "home": "Home",
+    "catalogue": "Catalogue",
+    "login": "Login",
+    "logout": "Logout",
+    "cart": "Cart",
+    "description": "Use navigation bar to navigate through the website.",
+    "light_mode": "☀️ Light Mode",
+    "dark_mode": "🌙 Dark Mode"
+  },
+  "product": {
+    "cart": "Cart",
+    "price": "Price",
+    "add_to_cart": "Add to Cart",
+    "title": "Title",
+    "quantity": "Quantity",
+    "actions": "Actions",
+    "remove": "Remove",
+    "total": "Total",
+    "clear_cart": "Clear Cart"
+  }
+}

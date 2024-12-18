@@ -1,0 +1,51 @@
+{
+  "login": {
+    "title": "Logowanie",
+    "username": "Nazwa użytkownika",
+    "password": "Hasło",
+    "submit": "Zaloguj się",
+    "no_account": "Zarejestruj się",
+    "error": "Błędne dane logowania."
+  },
+  "register": {
+    "title": "Rejestracja",
+    "username": "Nazwa użytkownika",
+    "email": "E-mail",
+    "password": "Hasło",
+    "submit": "Zarejestruj się",
+    "success": "Rejestracja zakończona sukcesem! Zaloguj się."
+  },
+  "logout": "Wyloguj się",
+  "admin": "Administrator",
+  "user": "Użytkownik",
+  "edit_products": "Edytuj Produkty",
+  "welcome": "Witamy w katalogu produktów",
+  "description": "Wkrótce dodamy więcej funkcji!",
+  "currentLanguage": "Obecny język",
+  "product_list_title": "Lista Produktów",
+  "error_default": "Wystąpił nieoczekiwany błąd.",
+  "error_404": "Strona nie została znaleziona.",
+  "error_in_progress": "Ta funkcja jest w trakcie tworzenia. Proszę spróbować później!",
+  "go_home": "Wróć do strony głównej",
+  "menu": {
+    "home": "Strona główna",
+    "catalogue": "Katalog",
+    "login": "Logowanie",
+    "logout": "Wylogowanie",
+    "cart": "Koszyk",
+    "description": "Użyj paska nawigacyjnego, aby nawigować po stronie.",
+    "light_mode": "☀️ Tryb jasny",
+    "dark_mode": "🌙 Tryb ciemny"
+  },
+  "product": {
+    "cart": "Koszyk",
+    "price": "Cena",
+    "add_to_cart": "Dodaj do koszyka",
+    "title": "Tytuł",
+    "quantity": "Ilość",
+    "actions": "Akcje",
+    "remove": "Usuń",
+    "total": "Suma",
+    "clear_cart": "Wyczyszć koszyk"
+  }
+}

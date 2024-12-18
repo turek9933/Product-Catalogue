@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+    volumes:
+      - ./backend/app/uploads:/app/uploads
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+
+  db:
+    image: mysql:8.0
+    environment:
+        MYSQL_ROOT_PASSWORD: rootpassword
+        MYSQL_DATABASE: product_catalog
+        MYSQL_USER: user
+        MYSQL_PASSWORD: password
+    volumes:
+        - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
