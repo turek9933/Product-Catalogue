@@ -1,3 +1,8 @@
+SET NAMES utf8mb4;
+SET character_set_client = utf8mb4;
+SET character_set_connection = utf8mb4;
+SET character_set_results = utf8mb4;
+
 CREATE TABLE products (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name_en VARCHAR(255),

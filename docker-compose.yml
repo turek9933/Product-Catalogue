@@ -4,6 +4,9 @@ services:
   backend:
     build:
       context: ./backend
+    environment:
+      DATABASE_URL: mysql://user:password@db:3306/product_catalog
+      FRONTEND_URL: http://localhost:3000
     volumes:
       - ./backend/app/uploads:/app/uploads
     ports:
@@ -24,6 +27,7 @@ services:
         MYSQL_DATABASE: product_catalog
         MYSQL_USER: user
         MYSQL_PASSWORD: password
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_0900_ai_ci
     volumes:
         - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
