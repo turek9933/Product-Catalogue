@@ -9,7 +9,7 @@ const Rating = ({ value, onChange, readOnly = false }) => {
       stars.push(
         <span
           key={i}
-          onClick={() => !readOnly && onChange(i)} // Ustaw ocenę po kliknięciu
+          onClick={() => !readOnly && onChange(i)}
           style={{
             cursor: readOnly ? "default" : "pointer",
             color: i <= value ? "#FFD700" : "#C0C0C0",
@@ -28,7 +28,7 @@ const Rating = ({ value, onChange, readOnly = false }) => {
 
 Rating.propTypes = {
   value: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   readOnly: PropTypes.bool,
 };
 

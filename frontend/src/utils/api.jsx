@@ -61,6 +61,18 @@ export const loginUser = async (username, password) => {
     return await response.json();
 };
 
+export const getCurrentUser = async (token) => {
+  const response = await fetch(`${BASE_URL}/auth/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("Failed to fetch user details");
+  }
+  return await response.json();
+};
+
 export const fetchComments = async (productId) => {
   const response = await fetch(`${BASE_URL}/comments/products/${productId}`);
   if (!response.ok) {
@@ -83,4 +95,17 @@ export const postComment = async (comment, token) => {
     throw new Error(error.detail || 'Failed to post comment');
   }
   return response.json();
+};
+
+export const deleteComment = async (commentId, token) => {
+  const response = await fetch(`${BASE_URL}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.detail || 'Failed to delete comment');
+  }
 };

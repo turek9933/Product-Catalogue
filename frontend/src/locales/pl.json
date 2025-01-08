@@ -46,6 +46,18 @@
     "actions": "Akcje",
     "remove": "Usuń",
     "total": "Suma",
-    "clear_cart": "Wyczyszć koszyk"
-  }
+    "clear_cart": "Wyczyszć koszyk",
+    "error": "Bład produktu"
+  },
+  "comments": {
+    "title": "Komentarze",
+    "add": "Dodaj komentarz",
+    "error": "Bład komentarzy",
+    "placeholder": "Treść komentarza",
+    "rating": "Ocena",
+    "submit": "Opublikuj",
+    "login_required": "Logowanie jest konieczne",
+    "delete": "Usuń"
+  },
+  "loading": "Ładowanie..."
 }

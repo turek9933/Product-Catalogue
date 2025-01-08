@@ -46,6 +46,18 @@
     "actions": "Actions",
     "remove": "Remove",
     "total": "Total",
-    "clear_cart": "Clear Cart"
-  }
+    "clear_cart": "Clear Cart",
+    "error": "Product error"
+  },
+  "comments": {
+    "title": "Comments",
+    "add": "Add comment",
+    "error": "Comments error",
+    "placeholder": "Comment content",
+    "rating": "Rating",
+    "submit": "Publish",
+    "login_required": "Login is required",
+    "delete": "Delete"
+  },
+  "loading": "Loading..."
 }

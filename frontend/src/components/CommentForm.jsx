@@ -13,21 +13,19 @@ const CommentForm = ({ productId, onCommentAdded }) => {
   const [rating, setRating] = useState(5);
   const [error, setError] = useState(null);
 
+  if (!isLoggedIn) {
+    return <p>{t("comments.login_required")}</p>;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!isLoggedIn || !token) {
-      setError(t("comments.loginRequired"));
-      return;
-    }
-
     try {
       await postComment({ content, rating, product_id: productId }, token);
       setContent("");
       setRating(5);
       onCommentAdded();
     } catch (err) {
-      setError(err.message || t("comments.addError"));
+      setError(err.message || t("comments.error"));
     }
   };
 
