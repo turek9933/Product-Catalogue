@@ -47,7 +47,10 @@
     "remove": "Remove",
     "total": "Total",
     "clear_cart": "Clear Cart",
-    "error": "Product error"
+    "error": "Product error",
+    "edit": "Edit",
+    "delete": "Delete",
+    "add": "Add"
   },
   "comments": {
     "title": "Comments",

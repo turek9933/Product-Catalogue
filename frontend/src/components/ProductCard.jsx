@@ -4,7 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "../context/LanguageContext";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onEdit, onDelete, isAdmin }) => {
   const { addToCart } = useCart();
   const { t } = useTranslation();
   const { language } = useLanguage();
@@ -22,7 +22,23 @@ const ProductCard = ({ product }) => {
       </h3>
       <p>{description}</p>
       <p className="product-price">{product.price} USD</p>
-      <button className="add-to-cart-button" onClick={() => addToCart(product)}>{t("product.add_to_cart")}</button>
+      
+      <div className="product-actions">
+        <button className="add-to-cart-button" onClick={() => addToCart(product)}>
+          {t("product.add_to_cart")}
+        </button>
+        <br />
+        {isAdmin && (
+          <>
+          <button className="edit-product-button" onClick={onEdit}>
+            {t("product.edit")}
+          </button>
+          <button className="delete-product-button" onClick={onDelete}>
+            {t("product.delete")}
+          </button>
+          </>
+        )}
+      </div>
     </div>
   );
 };
@@ -39,6 +55,9 @@ ProductCard.propTypes = {
     price: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
   }).isRequired,
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
+  isAdmin: PropTypes.bool,
 };
 
 export default ProductCard;

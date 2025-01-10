@@ -13,6 +13,51 @@ export const fetchProducts = async () => {
   }));
 };
 
+export const createProduct = async (formData) => {
+  const response = await fetch(`${BASE_URL}/products`, {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.detail || "Failed to create product");
+  }
+
+  return response.json();
+};
+
+export const updateProduct = async (productId, formData) => {
+  const response = await fetch(`${BASE_URL}/products/edit`, {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.detail || "Failed to update product");
+  }
+
+  return response.json();
+};
+
+export const deleteProduct = async (productId, token) => {
+  const response = await fetch(`${BASE_URL}/products/${productId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.detail || 'Failed to delete product');
+  }
+
+  return response.json();
+};
+
+
 export const fetchProductById = async (id) => {
   try {
     const response = await fetch(`${BASE_URL}/products/${id}`);

@@ -1,23 +1,33 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
-import { fetchProducts } from "../utils/api";
+import { fetchProducts, getCurrentUser, deleteProduct } from "../utils/api";
+import { useTranslation } from "react-i18next";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 20;
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const loadProducts = async () => {
+    const loadUserAndProducts = async () => {
       try {
-        const data = await fetchProducts();
-        setProducts(data);
+        const token = localStorage.getItem("token");
+        if (token) {
+          const user = await getCurrentUser(token);
+          setCurrentUser(user);
+        }
+        const productsData = await fetchProducts();
+        setProducts(productsData);
       } catch (err) {
-        console.error("Failed to load products", err);
+        console.error("Failed to load products or user", err);
       }
     };
 
-    loadProducts();
+    loadUserAndProducts();
   }, []);
 
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -26,12 +36,42 @@ const ProductList = () => {
 
   const totalPages = Math.ceil(products.length / productsPerPage);
 
+  const handleAddProduct = () => {
+    navigate("/products/add");
+  };
+
+  const handleEditProduct = (productId) => {
+    navigate(`/products/edit/${productId}`);
+  };
+  const handleDeleteProduct = async (productId) => {
+    try {
+      const token = localStorage.getItem("token");
+      await deleteProduct(productId, token);
+      setProducts((prev) => prev.filter((product) => product.id !== productId));
+    } catch (err) {
+      console.error("Failed to delete product:", err.message);
+    }
+  };
+  
+
   return (
     <div>
+      {currentUser?.role === "admin" && (
+        <button onClick={handleAddProduct} className="add-product-btn">
+          {t("product.add")}
+        </button>
+      )}
+
       <div className="product-list">
-      {currentProducts.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+        {currentProducts.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onEdit={() => handleEditProduct(product.id)}
+            onDelete={() => handleDeleteProduct(product.id)}
+            isAdmin={currentUser?.role === "admin"}
+          />
+        ))}
       </div>
 
       <div className="pagination">

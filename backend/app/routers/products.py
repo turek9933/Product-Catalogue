@@ -84,3 +84,58 @@ def get_image(filename: str):
     if file_path.exists():
         return FileResponse(file_path)
     raise HTTPException(status_code=404, detail="Image not found")
+
+@router.post("/edit", response_model=schemas.Product)
+def edit_product(
+    product_id: int = Form(...),
+    name_en: str = Form(None),
+    name_pl: str = Form(None),
+    short_description_en: str = Form(None),
+    short_description_pl: str = Form(None),
+    full_description_en: str = Form(None),
+    full_description_pl: str = Form(None),
+    price: float = Form(None),
+    image: UploadFile = File(None),
+    db: Session = Depends(get_db),
+):
+    product = db.query(models.Product).filter(models.Product.id == product_id).first()
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found")
+
+    if name_en: product.name_en = name_en
+    if name_pl: product.name_pl = name_pl
+    if short_description_en: product.short_description_en = short_description_en
+    if short_description_pl: product.short_description_pl = short_description_pl
+    if full_description_en: product.full_description_en = full_description_en
+    if full_description_pl: product.full_description_pl = full_description_pl
+    if price is not None: product.price = price
+
+    # Obsługa obrazu, jeśli przesłano nowy
+    if image:
+        file_extension = image.filename.split(".")[-1]
+        image_filename = f"product_{product.id}.{file_extension}"
+        image_path = UPLOAD_DIR / image_filename
+        with open(image_path, "wb") as buffer:
+            shutil.copyfileobj(image.file, buffer)
+        product.image = str(image_filename)
+    elif image is None and not product.image:
+        raise HTTPException(status_code=400, detail="Image is required")
+
+    db.commit()
+    db.refresh(product)
+    return product
+
+@router.delete("/{product_id}", response_model=dict)
+def delete_product(product_id: int, db: Session = Depends(get_db)):
+    product = db.query(models.Product).filter(models.Product.id == product_id).first()
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found")
+
+    if product.image:
+        image_path = UPLOAD_DIR / product.image
+        if image_path.exists():
+            image_path.unlink()
+
+    db.delete(product)
+    db.commit()
+    return {"message": "Product deleted successfully"}

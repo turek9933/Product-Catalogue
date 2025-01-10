@@ -47,7 +47,10 @@
     "remove": "Usuń",
     "total": "Suma",
     "clear_cart": "Wyczyszć koszyk",
-    "error": "Bład produktu"
+    "error": "Bład produktu",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "add": "Dodaj"
   },
   "comments": {
     "title": "Komentarze",
