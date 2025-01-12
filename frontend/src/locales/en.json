@@ -5,7 +5,8 @@
     "password": "Password",
     "submit": "Login",
     "no_account": "Register here",
-    "error": "Login failed."
+    "error": "Login failed.",
+    "request_password_reset": "Reset password"
   },
   "register": {
     "title": "Register",
@@ -14,6 +15,29 @@
     "password": "Password",
     "submit": "Register",
     "success": "Registration successful! Please log in."
+  },
+  "reset_password": {
+    "title": "Reset Password",
+    "title_request": "Request Password Reset",
+    "email": "Email",
+    "submit": "Reset Password",
+    "submit_request": "Send Reset Link",
+    "new_password": "New Password"
+  },
+  "account": {
+    "title": "Account",
+    "username": "Username",
+    "new_username": "New username",
+    "email": "Email",
+    "new_email": "New email",
+    "password": "Password",
+    "new_password": "New password",
+    "current_password": "Current password",
+    "submit": "Save",
+    "delete": "Delete account",
+    "delete_warning": "Are you sure you want to delete your account?",
+    "update": "Update account",
+    "change_password": "Change Password"
   },
   "logout": "Logout",
   "admin": "Admin",
@@ -29,6 +53,8 @@
   "go_home": "Go to Homepage",
   "menu": {
     "home": "Home",
+    "account": "Account",
+    "edit_profile": "Edit",
     "catalogue": "Catalogue",
     "login": "Login",
     "logout": "Logout",

@@ -62,6 +62,10 @@ const Login = () => {
       <button onClick={() => navigate("/register")} style={{ marginTop: "10px" }}>
         {t("login.no_account")}
       </button>
+      <br />
+      <button onClick={() => navigate("/request-password-reset")} style={{ marginTop: "10px" }}>
+        {t("login.request_password_reset")}
+      </button>
     </div>
   );
 };

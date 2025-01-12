@@ -36,10 +36,14 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (username, email, hashed_password, role)
+VALUES ('deleted', 'deleted@example.com', '$2b$12$phJph9ZX.lOpj4iP4q4EVeKdjet9DYbGbNGhcb9kI.nmQLQxKN2l2', 'deleted');
+
+INSERT INTO users (username, email, hashed_password, role)
 VALUES ('admin', 'admin@example.com', '$2b$12$jO7gGsTKWPlxnp93gGJD/OlWOB/yux/9Gkm8pX8WXLLl80ghxUrmi', 'admin');
 
 INSERT INTO users (username, email, hashed_password, role)
 VALUES ('user', 'user@example.com', '$2b$12$phJph9ZX.lOpj4iP4q4EVeKdjet9DYbGbNGhcb9kI.nmQLQxKN2l2', 'user');
+
 
 CREATE TABLE comments (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -53,10 +57,10 @@ CREATE TABLE comments (
 );
 
 INSERT INTO comments (product_id, user_id, content, rating)
-VALUES (1, 1, 'Amazing!', 5);
+VALUES (1, 2, 'Amazing!', 5);
 
 INSERT INTO comments (product_id, user_id, content, rating)
-VALUES (1, 2, 'Not so cool :(', 2);
+VALUES (1, 3, 'Not so cool :(', 2);
 
 INSERT INTO comments (product_id, user_id, content, rating)
-VALUES (3, 1, 'Taste wonderfull!', 5);
+VALUES (3, 2, 'Taste wonderfull!', 5);

@@ -1,3 +1,5 @@
+
+import { jwtDecode } from "jwt-decode";
 import { BASE_URL } from '../config';
 
 export const fetchProducts = async () => {
@@ -106,16 +108,32 @@ export const loginUser = async (username, password) => {
     return await response.json();
 };
 
+
 export const getCurrentUser = async (token) => {
-  const response = await fetch(`${BASE_URL}/auth/me`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  if (!response.ok) {
-    throw new Error("Failed to fetch user details");
+  try {
+    const decodedToken = jwtDecode(token);
+    const currentTime = Math.floor(Date.now() / 1000);
+
+    if (decodedToken.exp < currentTime) {
+      alert("Your session has expired. Please log in again.");
+      throw new Error("Token expired");
+    }
+
+    const response = await fetch(`${BASE_URL}/auth/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch user details");
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error in getCurrentUser:", error);
+    throw error;
   }
-  return await response.json();
 };
 
 export const fetchComments = async (productId) => {
@@ -127,11 +145,11 @@ export const fetchComments = async (productId) => {
 };
 
 export const postComment = async (comment, token) => {
-  const response = await fetch(`${BASE_URL}/comments`, { // Poprawiony URL
+  const response = await fetch(`${BASE_URL}/comments`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`, // Token użytkownika
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(comment),
   });
@@ -154,3 +172,91 @@ export const deleteComment = async (commentId, token) => {
     throw new Error(error.detail || 'Failed to delete comment');
   }
 };
+
+export const requestPasswordReset = async (email) => {
+  const response = await fetch(`${BASE_URL}/auth/reset-password-request/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.detail || 'Failed to send password reset request');
+  }
+
+  return response.json();
+};
+
+export const resetPassword = async (data) => {
+  const response = await fetch(`${BASE_URL}/auth/reset-password/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.detail || 'Failed to reset password');
+  }
+
+  return response.json();
+};
+
+
+export const updateProfile = async (data, token) => {
+  const response = await fetch(`${BASE_URL}/auth/update-profile/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    console.error("Error details from server:", error);
+    throw new Error(error.detail || "Failed to update profile");
+  }
+
+  return response.json();
+};
+
+
+export const updatePassword = async (data, token) => {
+  const response = await fetch(`${BASE_URL}/auth/update-password/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.detail || 'Failed to update password');
+  }
+
+  return response.json();
+};
+
+export const deleteAccount = async (data, token) => {
+  const response = await fetch(`${BASE_URL}/auth/delete-account/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.detail || "Failed to delete account");
+  }
+
+  return response.json();
+};
+

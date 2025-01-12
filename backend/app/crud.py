@@ -1,4 +1,5 @@
 import email
+from operator import ne
 from sqlalchemy.orm import Session
 from . import models, schemas
 from passlib.context import CryptContext
@@ -36,3 +37,38 @@ def create_user(db: Session, user: schemas.UserCreate, role: str = "user"):
     db.commit()
     db.refresh(db_user)
     return db_user
+
+def get_user_by_email(db: Session, email: str):
+    return db.query(models.User).filter(models.User.email == email).first()
+
+def get_user_by_id(db: Session, user_id: int):
+    return db.query(models.User).filter(models.User.id == user_id).first()
+
+def verify_password(plain_password: str, hashed_password: str):
+    return pwd_context.verify(plain_password, hashed_password)
+
+def hash_password(password: str):
+    return pwd_context.hash(password)
+
+def update_user_password(db: Session, user: models.User, new_password: str):
+    user.hashed_password = hash_password(new_password)
+    db.commit()
+    db.refresh(user)
+    return user
+
+def update_user_profile(db: Session, user: models.User, new_email: str = None, new_username: str = None):
+    if new_email:
+        user.email = new_email
+    if new_username:
+        user.username = new_username
+    db.commit()
+    db.refresh(user)
+    return user
+
+def delete_user(db: Session, user: models.User):
+    db.delete(user)
+    db.commit()
+
+def reassign_user_comments(db: Session, user_id: int, new_user_id: int):
+    db.query(models.Comment).filter(models.Comment.user_id == user_id).update({"user_id": new_user_id})
+    db.commit()

@@ -5,7 +5,8 @@
     "password": "Hasło",
     "submit": "Zaloguj się",
     "no_account": "Zarejestruj się",
-    "error": "Błędne dane logowania."
+    "error": "Błędne dane logowania.",
+    "request_password_reset": "Zresetuj hasło"
   },
   "register": {
     "title": "Rejestracja",
@@ -14,6 +15,29 @@
     "password": "Hasło",
     "submit": "Zarejestruj się",
     "success": "Rejestracja zakończona sukcesem! Zaloguj się."
+  },
+  "reset_password": {
+    "title": "Zresetuj Hasło",
+    "title_request": "Zresetuj Hasło",
+    "email": "Email",
+    "submit": "Zresetuj Hasło",
+    "submit_request": "Wyślij Link",
+    "new_password": "Nowe Hasło"
+  },
+  "account": {
+    "title": "Konto",
+    "username": "Nazwa użytkownika",
+    "new_username": "Nowa nazwa użytkownika",
+    "email": "Email",
+    "new_email": "Nowy email",
+    "password": "Hasło",
+    "new_password": "Nowe hasło",
+    "current_password": "Aktualne hasło",
+    "submit": "Zaktualizuj",
+    "delete": "Usunć konto",
+    "delete_warning": "Czy na pewno chcesz usunąć konto?",
+    "update": "Zaktualizuj",
+    "change_password": "Zmienić hasło"
   },
   "logout": "Wyloguj się",
   "admin": "Administrator",
@@ -29,9 +53,11 @@
   "go_home": "Wróć do strony głównej",
   "menu": {
     "home": "Strona główna",
+    "account": "Konto",
+    "edit_profile": "Edycja",
     "catalogue": "Katalog",
     "login": "Logowanie",
-    "logout": "Wylogowanie",
+    "logout": "Wyloguj",
     "cart": "Koszyk",
     "description": "Użyj paska nawigacyjnego, aby nawigować po stronie.",
     "light_mode": "☀️ Tryb jasny",
@@ -46,7 +72,7 @@
     "actions": "Akcje",
     "remove": "Usuń",
     "total": "Suma",
-    "clear_cart": "Wyczyszć koszyk",
+    "clear_cart": "Wyczyść koszyk",
     "error": "Bład produktu",
     "edit": "Edytuj",
     "delete": "Usuń",

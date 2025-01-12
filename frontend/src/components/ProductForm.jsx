@@ -49,9 +49,6 @@ const ProductForm = ({ mode }) => {
         formData.append("product_id", id);
     }
 
-    console.log("Submitting formData:", Array.from(formData.entries())); // Debug danych
-
-
     try {
       if (mode === "add") {
         await createProduct(formData);

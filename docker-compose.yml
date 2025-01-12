@@ -1,12 +1,14 @@
-version: "3.8"
-
 services:
   backend:
     build:
       context: ./backend
     environment:
-      DATABASE_URL: mysql://user:password@db:3306/product_catalog
+      DATABASE_URL: mysql+pymysql://user:password@db:3306/product_catalog
       FRONTEND_URL: http://localhost:3000
+      FRONTEND_URLS: http://localhost:3000,http://127.0.0.1:3000
+      SECRET_KEY: "SECRET_KEY"
+      DELETED_USER_USERNAME: "deleted"
+      DELETED_USER_EMAIL: "deleted@example.com"
     volumes:
       - ./backend/app/uploads:/app/uploads
     ports:
@@ -17,6 +19,8 @@ services:
   frontend:
     build:
       context: ./frontend
+    environment:
+      VITE_BASE_URL: http://localhost:8000
     ports:
       - "3000:3000"
 

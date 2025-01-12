@@ -57,3 +57,25 @@ class CommentResponse(CommentBase):
 
     class Config:
         from_attributes = True
+
+class UserPasswordResetRequest(BaseModel):
+    email: str
+
+class UserPasswordReset(BaseModel):
+    token: str
+    new_password: str
+
+class UserProfileUpdate(BaseModel):
+    user_id: int
+    current_password: str
+    new_email: Optional[str] = None
+    new_username: Optional[str] = None
+
+class UserPasswordUpdate(BaseModel):
+    user_id: int
+    current_password: str
+    new_password: str
+
+class UserAccountDelete(BaseModel):
+    user_id: int
+    current_password: str
