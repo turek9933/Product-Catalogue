@@ -43,3 +43,5 @@ db_data/
 
 # Ignore compiled Python files (more concise)
 *.py[cod]
+
+minio/

@@ -52,11 +52,10 @@ const ProductForm = ({ mode }) => {
     try {
       if (mode === "add") {
         await createProduct(formData);
-        navigate("/products");
       } else if (mode === "edit") {
         await updateProduct(id, formData);
-        navigate("/products");
       }
+      navigate("/products");
     } catch (err) {
       setError(err.message);
     }
@@ -77,8 +76,9 @@ const ProductForm = ({ mode }) => {
 
   return (
     <form onSubmit={handleSubmit} className="product-form">
-      <label>
-        {t("product.name_en")}
+      <h1>{mode === "add" ? t("product.add") : t("product.update")}</h1>
+      <div className="form-group">
+        <label>{t("product.name_en")}</label>
         <input
           type="text"
           name="name_en"
@@ -86,9 +86,9 @@ const ProductForm = ({ mode }) => {
           onChange={handleInputChange}
           required
         />
-      </label>
-      <label>
-        {t("product.name_pl")}
+      </div>
+      <div className="form-group">
+        <label>{t("product.name_pl")}</label>
         <input
           type="text"
           name="name_pl"
@@ -96,41 +96,41 @@ const ProductForm = ({ mode }) => {
           onChange={handleInputChange}
           required
         />
-      </label>
-      <label>
-        {t("product.short_description_en")}
+      </div>
+      <div className="form-group">
+        <label>{t("product.short_description_en")}</label>
         <textarea
           name="short_description_en"
           value={productData.short_description_en}
           onChange={handleInputChange}
         />
-      </label>
-      <label>
-        {t("product.short_description_pl")}
+      </div>
+      <div className="form-group">
+        <label>{t("product.short_description_pl")}</label>
         <textarea
           name="short_description_pl"
           value={productData.short_description_pl}
           onChange={handleInputChange}
         />
-      </label>
-      <label>
-        {t("product.full_description_en")}
+      </div>
+      <div className="form-group">
+        <label>{t("product.full_description_en")}</label>
         <textarea
           name="full_description_en"
           value={productData.full_description_en}
           onChange={handleInputChange}
         />
-      </label>
-      <label>
-        {t("product.full_description_pl")}
+      </div>
+      <div className="form-group">
+        <label>{t("product.full_description_pl")}</label>
         <textarea
           name="full_description_pl"
           value={productData.full_description_pl}
           onChange={handleInputChange}
         />
-      </label>
-      <label>
-        {t("product.price")}
+      </div>
+      <div className="form-group">
+        <label>{t("product.price")}</label>
         <input
           type="number"
           step="0.01"
@@ -139,11 +139,11 @@ const ProductForm = ({ mode }) => {
           onChange={handleInputChange}
           required
         />
-      </label>
-      <label>
-        {t("product.image")}
+      </div>
+      <div className="form-group">
+        <label>{t("product.image")}</label>
         <input type="file" name="image" onChange={handleImageChange} />
-      </label>
+      </div>
       <button type="submit">
         {mode === "add" ? t("product.add") : t("product.update")}
       </button>

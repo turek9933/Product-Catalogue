@@ -15,24 +15,35 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    networks:
+      - app_network
 
   frontend:
     build:
       context: ./frontend
     environment:
       VITE_BASE_URL: http://localhost:8000
+      VITE_PAYPAL_CLIENT_ID: "PAYPAL_CLIENT_ID" # Add your PayPal client ID here
     ports:
       - "3000:3000"
+    networks:
+      - app_network
 
   db:
     image: mysql:8.0
     environment:
-        MYSQL_ROOT_PASSWORD: rootpassword
-        MYSQL_DATABASE: product_catalog
-        MYSQL_USER: user
-        MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: product_catalog
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_0900_ai_ci
     volumes:
         - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "3306:3306"
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge

@@ -3,12 +3,14 @@ import { useLanguage } from '../context/LanguageContext';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 
 const NavigationMenu = () => {
   const { t } = useTranslation();
   const { language, changeLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const { isLoggedIn, logout } = useAuth();
+  const { cartItemsCount } = useCart();
   const navigate = useNavigate();
 
   const handleLanguageChange = (e) => {
@@ -46,7 +48,7 @@ const NavigationMenu = () => {
               <option value="logout">{t('menu.logout')}</option>
             </select>
           </div>
-          <Link to="/cart">{t('menu.cart')}</Link>
+          <Link to="/cart">{t('menu.cart')} ({cartItemsCount})</Link>
           </>
         ) : (
           <Link to="/login">{t('menu.login')}</Link>

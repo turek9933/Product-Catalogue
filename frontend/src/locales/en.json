@@ -6,7 +6,8 @@
     "submit": "Login",
     "no_account": "Register here",
     "error": "Login failed.",
-    "request_password_reset": "Reset password"
+    "request_password_reset": "Reset password",
+    "required": "Login required"
   },
   "register": {
     "title": "Register",
@@ -37,7 +38,8 @@
     "delete": "Delete account",
     "delete_warning": "Are you sure you want to delete your account?",
     "update": "Update account",
-    "change_password": "Change Password"
+    "change_password": "Change Password",
+    "save": "Zapisz"
   },
   "logout": "Logout",
   "admin": "Admin",
@@ -76,7 +78,17 @@
     "error": "Product error",
     "edit": "Edit",
     "delete": "Delete",
-    "add": "Add"
+    "deleted": "Product deleted",
+    "add": "Add",
+    "added": "Product added to cart",
+    "delete_require_comments_remove": "You can't delete the product because it has comments",
+    "name_en": "Name in English",
+    "name_pl": "Name in Polish",
+    "short_description_en": "Short description in English",
+    "short_description_pl": "Short description in Polish",
+    "full_description_en": "Full description in English",
+    "full_description_pl": "Full description in Polish",
+    "image": "Image"
   },
   "comments": {
     "title": "Comments",
@@ -88,5 +100,13 @@
     "login_required": "Login is required",
     "delete": "Delete"
   },
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "order" : {
+    "complited": "Transaction completed",
+    "summary": "Order Summary",
+    "invalid_data": "Invalid order data",
+    "thanks_1": "Thank you, ",
+    "thanks_2": " for your purchase!",
+    "total": "Total paid: "
+  }
 }

@@ -5,7 +5,7 @@ import { useLanguage } from "../context/LanguageContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import ErrorMessage from "../components/ErrorMessage";
-
+import PayPalButton from "../components/PayPalButton";
 
 const CartPage = () => {
   const { isLoggedIn } = useAuth();
@@ -27,7 +27,7 @@ const CartPage = () => {
   return (
     <div className="cart-page">
       <h1>{t("product.cart")}</h1>
-      <table>
+      <table className="cart-table">
         <thead>
           <tr>
             <th>#</th>
@@ -44,18 +44,19 @@ const CartPage = () => {
               <td>{item[`name_${language}`] || item.name_en}</td>
               <td>{item.price.toFixed(2)} USD</td>
               <td>
-                <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>
-                {item.quantity}
-                <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+                <button className="quantity-btn" onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>
+                <span className="quantity-display">{item.quantity}</span>
+                <button className="quantity-btn" onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
               </td>
               <td>
-                <button onClick={() => removeFromCart(item.id)}>{t("product.remove")}</button>
+                <button className="remove-btn" onClick={() => removeFromCart(item.id)}>{t("product.remove")}</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
       <h2>{t("product.total")}: {totalPrice.toFixed(2)} USD</h2>
+      <PayPalButton totalPrice={totalPrice} />
       <button className="clear-cart-button" onClick={clearCart}>{t("product.clear_cart")}</button>
     </div>
   );

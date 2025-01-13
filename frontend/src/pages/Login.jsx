@@ -17,7 +17,7 @@ const Login = () => {
     setError("");
     try {
       const data = await loginUser(username, password);
-      
+
       if (data && data.access_token) {
         localStorage.setItem("token", data.access_token);
         login();
@@ -31,10 +31,10 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="auth-container">
       <h1>{t("login.title")}</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className="auth-form">
+        <div className="form-group">
           <label>{t("login.username")}</label>
           <input
             type="text"
@@ -45,7 +45,7 @@ const Login = () => {
             }}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>{t("login.password")}</label>
           <input
             type="password"
@@ -56,14 +56,13 @@ const Login = () => {
             }}
           />
         </div>
-        {error && <p>{error}</p>}
-        <button type="submit">{t("login.submit")}</button>
+        {error && <p className="error-message">{error}</p>}
+        <button type="submit" className="submit-btn">{t("login.submit")}</button>
       </form>
-      <button onClick={() => navigate("/register")} style={{ marginTop: "10px" }}>
+      <button onClick={() => navigate("/register")} className="secondary-btn">
         {t("login.no_account")}
       </button>
-      <br />
-      <button onClick={() => navigate("/request-password-reset")} style={{ marginTop: "10px" }}>
+      <button onClick={() => navigate("/request-password-reset")} className="secondary-btn">
         {t("login.request_password_reset")}
       </button>
     </div>

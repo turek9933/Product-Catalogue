@@ -24,10 +24,10 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className="auth-container">
       <h1>{t("register.title")}</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className="auth-form">
+        <div className="form-group">
           <label>{t("register.username")}</label>
           <input
             type="text"
@@ -35,7 +35,7 @@ const Register = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>{t("register.email")}</label>
           <input
             type="email"
@@ -43,7 +43,7 @@ const Register = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>{t("register.password")}</label>
           <input
             type="password"
@@ -51,9 +51,9 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        {error && <p>{error}</p>}
-        {success && <p>{success}</p>}
-        <button type="submit">{t("register.submit")}</button>
+        {error && <p className="error-message">{error}</p>}
+        {success && <p className="success-message">{success}</p>}
+        <button type="submit" className="submit-btn">{t("register.submit")}</button>
       </form>
     </div>
   );

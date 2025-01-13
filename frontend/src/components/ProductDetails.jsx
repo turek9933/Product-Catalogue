@@ -13,6 +13,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
+  const [refreshTrigger, setRefreshTrigger] = useState(false);
   const { language } = useLanguage();
   const { addToCart } = useCart();
   const { t } = useTranslation();
@@ -29,6 +30,10 @@ const ProductDetails = () => {
 
     loadProductDetails();
   }, [id, t]);
+
+  const refreshComments = () => {
+    setRefreshTrigger((prev) => !prev);
+  };
 
   if (error) return <ErrorMessage message={error} />;
   if (!product) return <p>{t("loading")}</p>;
@@ -50,15 +55,9 @@ const ProductDetails = () => {
       <hr />
 
       <h2>{t("comments.title")}</h2>
-      <CommentList
-        productId={Number(id)}
-      />
-
+      <CommentList productId={Number(id)} refreshTrigger={refreshTrigger} />
       <h2>{t("comments.add")}</h2>
-      <CommentForm
-        productId={Number(id)}
-        onCommentAdded={() => {}}
-      />
+      <CommentForm productId={Number(id)} onCommentAdded={refreshComments} />
     </div>
   );
 };

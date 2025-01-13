@@ -11,6 +11,7 @@ const ProductForm = lazy(() => import('../components/ProductForm'));
 const UserProfile = lazy(() => import('../pages/UserProfile'));
 const RequestPasswordReset = lazy(() => import('../pages/RequestPasswordReset'));
 const ResetPassword = lazy(() => import('../pages/ResetPassword'));
+const OrderSummary = lazy(() => import('../pages/OrderSummary'));
 
 const routes = [
   { path: '/', element: <Home /> },
@@ -21,6 +22,7 @@ const routes = [
   { path: '/login', element: <Login /> },
   { path: '/register', element: <Register /> },
   { path: '/cart', element: <CartPage /> },
+  { path: '/order-summary', element: <OrderSummary /> },
   { path: '/profile', element: <UserProfile /> },
   { path: '/request-password-reset', element: <RequestPasswordReset /> },
   { path: '/reset-password', element: <ResetPassword /> },

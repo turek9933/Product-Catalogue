@@ -15,7 +15,7 @@ const formatDate = (dateString) => {
   return `${year}-${month}-${day}   ${hour}:${minute}`;
 };
 
-const CommentList = ({ productId }) => {
+const CommentList = ({ productId, refreshTrigger }) => {
   const { t } = useTranslation();
   const [comments, setComments] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
@@ -37,7 +37,7 @@ const CommentList = ({ productId }) => {
     };
 
     fetchUserAndComments();
-  }, [productId]);
+  }, [productId, refreshTrigger]);
 
   const handleDelete = async (commentId) => {
     try {
@@ -78,6 +78,7 @@ const CommentList = ({ productId }) => {
 
 CommentList.propTypes = {
   productId: PropTypes.number.isRequired,
+  refreshTrigger: PropTypes.bool.isRequired,
 };
 
 export default CommentList;

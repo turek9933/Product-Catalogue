@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
-import { fetchProducts, getCurrentUser, deleteProduct } from "../utils/api";
+import { fetchProducts, getCurrentUser, deleteProduct, fetchComments } from "../utils/api";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -46,8 +47,16 @@ const ProductList = () => {
   const handleDeleteProduct = async (productId) => {
     try {
       const token = localStorage.getItem("token");
+      const comments = await fetchComments(productId);
+
+      if (comments.length > 0) {
+        toast.error(t("product.delete_require_comments_remove"));
+        throw new Error(t("product.delete_require_comments_remove"));
+      }
+
       await deleteProduct(productId, token);
       setProducts((prev) => prev.filter((product) => product.id !== productId));
+      toast.success(t("product.deleted"));
     } catch (err) {
       console.error("Failed to delete product:", err.message);
     }

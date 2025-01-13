@@ -6,7 +6,8 @@
     "submit": "Zaloguj się",
     "no_account": "Zarejestruj się",
     "error": "Błędne dane logowania.",
-    "request_password_reset": "Zresetuj hasło"
+    "request_password_reset": "Zresetuj hasło",
+    "required": "Logowanie wymagane"
   },
   "register": {
     "title": "Rejestracja",
@@ -34,10 +35,11 @@
     "new_password": "Nowe hasło",
     "current_password": "Aktualne hasło",
     "submit": "Zaktualizuj",
-    "delete": "Usunć konto",
+    "delete": "Usuń konto",
     "delete_warning": "Czy na pewno chcesz usunąć konto?",
     "update": "Zaktualizuj",
-    "change_password": "Zmienić hasło"
+    "change_password": "Zmień hasło",
+    "save": "Zapisz"
   },
   "logout": "Wyloguj się",
   "admin": "Administrator",
@@ -76,7 +78,16 @@
     "error": "Bład produktu",
     "edit": "Edytuj",
     "delete": "Usuń",
-    "add": "Dodaj"
+    "add": "Dodaj",
+    "added": "Produkt został dodany do koszyka",
+    "delete_require_comments_remove": "You can't delete the product because it has comments",
+    "name_en": "Nazwa po angielsku",
+    "name_pl": "Nazwa po polsku",
+    "short_description_en": "Krótki opis po angielsku",
+    "short_description_pl": "Krótki opis po polsku",
+    "full_description_en": "Pełny opis po angielsku",
+    "full_description_pl": "Pełny opis po polsku",
+    "image": "Zdjęcie"
   },
   "comments": {
     "title": "Komentarze",
@@ -88,5 +99,13 @@
     "login_required": "Logowanie jest konieczne",
     "delete": "Usuń"
   },
-  "loading": "Ładowanie..."
+  "loading": "Ładowanie...",
+  "order" : {
+    "complited": "Transakcja zakończona",
+    "summary": "Podsumowanie zamówienia",
+    "invalid_data": "Nieprawidłowe dane zamoówienia",
+    "thanks_1": "Dziękujemy, ",
+    "thanks_2": " za zakup!",
+    "total": "Razem zapłacono: "
+  }
 }
