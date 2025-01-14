@@ -1,10 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from fastapi.responses import FileResponse
+from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 from pathlib import Path
 import shutil
 import uuid
 from .. import models
+from ..utils.minio_client import minio_client
+import mimetypes
 
 from .. import crud, schemas
 from ..database import SessionLocal
@@ -56,18 +59,19 @@ def create_product(
     # Generowanie unikalnej nazwy obrazu na podstawie ID produktu
     file_extension = image.filename.split(".")[-1]
     image_filename = f"product_{product.id}.{file_extension}"
-    image_path = UPLOAD_DIR / image_filename
+    
+    # Przesłanie pliku do MinIO
+    minio_client.upload_file(
+        file=image.file,
+        object_name=image_filename,
+        content_type=image.content_type
+    )
 
-    # Zapis zdjęcia na serwerze
-    with open(image_path, "wb") as buffer:
-        shutil.copyfileobj(image.file, buffer)
-
-    # Aktualizacja rekordu produktu o ścieżkę do zdjęcia
-    product.image = str(image_filename)
+    # Zapis tylko nazwy pliku w bazie danych
+    product.image = image_filename
     db.commit()
     db.refresh(product)
 
-    # Zwracamy pełny rekord produktu, w tym zaktualizowane pole `image`
     return product
 
 @router.get("/{product_id}", response_model=schemas.Product)
@@ -77,13 +81,27 @@ def read_product(product_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Product not found")
     return product
 
-
 @router.get("/images/{filename}")
 def get_image(filename: str):
-    file_path = UPLOAD_DIR / filename
-    if file_path.exists():
-        return FileResponse(file_path)
-    raise HTTPException(status_code=404, detail="Image not found")
+    try:
+        response = minio_client.client.get_object(
+            bucket_name=minio_client.bucket_name,
+            object_name=filename
+        )
+
+        # Rozpoznanie typu MIME
+        mime_type, _ = mimetypes.guess_type(filename)
+        if not mime_type:
+            mime_type = "application/octet-stream"
+
+
+        return StreamingResponse(
+            content=response,
+            media_type=mime_type,
+            headers={"Content-Disposition": f"inline; filename={filename}"}
+        )
+    except Exception as e:
+        raise HTTPException(status_code=404, detail="File not found")
 
 @router.post("/edit", response_model=schemas.Product)
 def edit_product(
@@ -132,9 +150,8 @@ def delete_product(product_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Product not found")
 
     if product.image:
-        image_path = UPLOAD_DIR / product.image
-        if image_path.exists():
-            image_path.unlink()
+        image_filename = product.image.split("/")[-1]
+        minio_client.delete_file(image_filename)
 
     db.delete(product)
     db.commit()
