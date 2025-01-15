@@ -12,6 +12,7 @@
 5. [Dodatkowe informacje](#dodatkowe-informacje)
    1. [Symulacja płatności PayPal](#symulacja-płatności-paypal)
    2. [Uzyskanie dostępu do backendu lub bazy danych](#uzyskanie-dostępu-do-backendu-lub-bazy-danych)
+   2. [Reset hasła użytkownika](#reset-hasła-użytkownika)
 
 **Opis Projektu**  
 Aplikacja katalogu produktów stworzona przy użyciu **React** (frontend) oraz **FastAPI** (backend). Dane są przechowywane w bazie danych **MySQL** oraz w serwerze **MinIO**. Funkcjonalności:
@@ -104,3 +105,8 @@ Przykład odkomentowania dla MinIO:
       - "9000:9000"
       - "9001:9001"
 ```
+### **Reset hasła użytkownika**
+Aby zresetować hasło generowany jest link. Nie jest on wysyłany bezpośrednio na adres mailowy użytkownika. Aplikacja tylko symuluje generowanie takiego linka oraz wypisuje go w terminalu. Można znaleźć link w logach Dockera - kontener backend. Pojawi się on również w terminalu w przypadku uruchomienia projektu komendą ```docker-compose up --build```. Link może wyglądać np. następująco:
+```bash
+Password reset link: http://localhost:3000/reset-password?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0IiwiZXhwIjoxNzM2OTUwNjk5fQ.4lZsUgfv4UuOgPVeHP2w2WK78KtimYT7_NSq0JeG7iU
+   ```
