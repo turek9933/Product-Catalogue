@@ -130,14 +130,20 @@ def edit_product(
 
     # Obsługa obrazu, jeśli przesłano nowy
     if image:
+        # Usuń stare zdjęcie z MinIO
+        if product.image:
+            old_image_filename = product.image
+            minio_client.delete_file(old_image_filename)
+
+        # Prześlij nowe zdjęcie do MinIO
         file_extension = image.filename.split(".")[-1]
         image_filename = f"product_{product.id}.{file_extension}"
-        image_path = UPLOAD_DIR / image_filename
-        with open(image_path, "wb") as buffer:
-            shutil.copyfileobj(image.file, buffer)
-        product.image = str(image_filename)
-    elif image is None and not product.image:
-        raise HTTPException(status_code=400, detail="Image is required")
+        minio_client.upload_file(
+            file=image.file,
+            object_name=image_filename,
+            content_type=image.content_type
+        )
+        product.image = image_filename
 
     db.commit()
     db.refresh(product)
