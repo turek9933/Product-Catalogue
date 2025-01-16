@@ -1,4 +1,6 @@
 ## **Product Catalogue**
+<i>Tomasz Turek nr indeksu: 44674\
+Mateusz Heleniak nr indeksu: 44671<i>
 
 ## **Spis treści**
 1. [Opis Projektu](#opis-projektu)
